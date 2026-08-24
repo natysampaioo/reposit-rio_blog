@@ -1,0 +1,162 @@
+js_content = """/**
+ * Script Interativo: Sistemas Digestivos (Ruminantes vs. Monogástricos)
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Alternância Dinâmica de Conteúdo (Filtro por Tipo)
+    createFilterControls();
+
+    // 2. Destacar Linhas da Tabela
+    setupTableHighlighting();
+
+    // 3. Modais de Detalhes para os Compartimentos Ruminantes
+    setupCardInteractivity();
+});
+
+/**
+ * Cria botões de filtro para alternar a exibição entre Ruminantes e Monogástricos
+ */
+function createFilterControls() {
+    const header = document.querySelector('header');
+    if (!header) return;
+
+    const filterContainer = document.createElement('div');
+    filterContainer.className = 'filter-container';
+    filterContainer.innerHTML = `
+        <button class="filter-btn active" data-filter="all">Ver Todos</button>
+        <button class="filter-btn" data-filter="ruminantes">Apenas Ruminantes</button>
+        <button class="filter-btn" data-filter="monogastricos">Apenas Monogástricos</button>
+    `;
+
+    header.appendChild(filterContainer);
+
+    // Estilização dinâmica para o filtro
+    const style = document.createElement('style');
+    style.textContent = `
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            background-color: var(--light-bg, #f3f4f6);
+            border: 1px solid var(--border, #e5e7eb);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--dark, #374151);
+            transition: all 0.2s ease;
+        }
+        .filter-btn:hover {
+            background-color: var(--primary-light, #eaf2e8);
+            color: var(--primary, #2d5a27);
+        }
+        .filter-btn.active {
+            background-color: var(--primary, #2d5a27);
+            color: white;
+            border-color: var(--primary, #2d5a27);
+        }
+        .is-hidden {
+            display: none !important;
+        }
+    `;
+    document.head.appendChild(style);
+
+    // Eventos de clique nos botões
+    filterContainer.addEventListener('click', (e) => {
+        if (!e.target.classList.contains('filter-btn')) return;
+
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+        e.target.classList.add('active');
+
+        const filter = e.target.getAttribute('data-filter');
+        applyFilter(filter);
+    });
+}
+
+/**
+ * Aplica o filtro selecionado ocultando/exibindo as seções e colunas relevantes
+ */
+function applyFilter(filter) {
+    const ruminantSection = document.querySelector('.grid').closest('section');
+    const monogastricSection = document.querySelector('.card.mono').closest('section');
+    const tableRows = document.querySelectorAll('tbody tr');
+
+    if (filter === 'ruminantes') {
+        ruminantSection.classList.remove('is-hidden');
+        monogastricSection.classList.add('is-hidden');
+        toggleTableColumn(1, false); // Oculta Monogástricos
+        toggleTableColumn(2, true);  // Exibe Ruminantes
+    } else if (filter === 'monogastricos') {
+        ruminantSection.classList.add('is-hidden');
+        monogastricSection.classList.remove('is-hidden');
+        toggleTableColumn(1, true);  // Exibe Monogástricos
+        toggleTableColumn(2, false); // Oculta Ruminantes
+    } else {
+        ruminantSection.classList.remove('is-hidden');
+        monogastricSection.classList.remove('is-hidden');
+        toggleTableColumn(1, true);
+        toggleTableColumn(2, true);
+    }
+}
+
+/**
+ * Controla a visibilidade das colunas na tabela comparativa
+ */
+function toggleTableColumn(colIndex, show) {
+    const table = document.querySelector('table');
+    if (!table) return;
+
+    const rows = table.rows;
+    for (let i = 0; i < rows.length; i++) {
+        const cell = rows[i].cells[colIndex];
+        if (cell) {
+            cell.style.display = show ? '' : 'none';
+        }
+    }
+}
+
+/**
+ * Destaca linhas da tabela ao passar o cursor para melhor leitura
+ */
+function setupTableHighlighting() {
+    const rows = document.querySelectorAll('tbody tr');
+    rows.forEach(row => {
+        row.addEventListener('mouseenter', () => {
+            row.style.transform = 'scale(1.01)';
+            row.style.transition = 'transform 0.15s ease';
+        });
+        row.addEventListener('mouseleave', () => {
+            row.style.transform = 'scale(1)';
+        });
+    });
+}
+
+/**
+ * Adiciona funcionalidade interativa aos cards dos compartimentos
+ */
+function setupCardInteractivity() {
+    const cards = document.querySelectorAll('.grid .card');
+    cards.forEach(card => {
+        card.style.cursor = 'pointer';
+        card.title = 'Clique para ver mais detalhes';
+
+        card.addEventListener('click', () => {
+            const title = card.querySelector('h3').textContent;
+            const description = card.querySelector('p').textContent;
+            
+            // Exemplo de alerta amigável (pode ser substituído por um modal customizado)
+            alert(`🔍 Detalhes de ${title}:\n\n${description}`);
+        });
+    });
+}
+"""
+
+with open("script.js", "w", encoding="utf-8") as f:
+    f.write(js_content)
+
+print("JS file created successfully.")

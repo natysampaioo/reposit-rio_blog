@@ -1,0 +1,267 @@
+html_content = """<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistemas Digestivos: Ruminantes vs. Monogástricos</title>
+    <style>
+        :root {
+            --primary: #2d5a27;
+            --primary-light: #eaf2e8;
+            --secondary: #8c6239;
+            --secondary-light: #f7f3ee;
+            --dark: #1f2937;
+            --light: #f9fafb;
+            --border: #e5e7eb;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            border-bottom: 2px solid var(--primary-light);
+            padding-bottom: 1.5rem;
+        }
+
+        h1 {
+            color: var(--primary);
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: #6b7280;
+            font-size: 1.1rem;
+        }
+
+        section {
+            margin-bottom: 2.5rem;
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-left: 4px solid var(--primary);
+            padding-left: 0.75rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #374151;
+        }
+
+        /* Tabela Comparativa */
+        .table-responsive {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border);
+        }
+
+        th {
+            background-color: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+
+        /* Cards e Grids */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .card {
+            background: var(--primary-light);
+            padding: 1.25rem;
+            border-radius: 8px;
+            border: 1px solid #d1e2ce;
+        }
+
+        .card.mono {
+            background: var(--secondary-light);
+            border-color: #ebdcd0;
+        }
+
+        .card h3 {
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card.mono h3 {
+            color: var(--secondary);
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+
+        .note {
+            background-color: #fffbe3;
+            border-left: 4px solid #d97706;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+            color: #9ca3af;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Sistemas Digestivos Anatomicamente Comparados</h1>
+            <p class="subtitle">Monogástricos vs. Ruminantes: Estrutura, Digestão e Absorção</p>
+        </header>
+
+        <section>
+            <h2> Visão Geral</h2>
+            <p>
+                A principal diferença entre os animais monogástricos e os ruminantes está na anatomia do estômago e no local onde ocorre a fermentação dos alimentos. Enquanto os monogástricos possuem um estômago simples de cavidade única, os ruminantes contam com uma estrutura complexa dividida em quatro compartimentos especializados na quebra de fibras vegetais.
+            </p>
+        </section>
+
+        <section>
+            <h2> Resumo Comparativo</h2>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Característica</th>
+                            <th>Monogástricos</th>
+                            <th>Ruminantes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Estrutura Gástrica</strong></td>
+                            <td>Estômago simples (1 cavidade)</td>
+                            <td>Estômago composto (4 cavidades)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Digestão de Celulose</strong></td>
+                            <td>Baixa ou restrita ao intestino grosso</td>
+                            <td>Altíssima no rúmen por ação microbiana</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ruminação</strong></td>
+                            <td>Não realizam</td>
+                            <td>Regurgitam e remastigam o alimento</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fonte de Energia Utama</strong></td>
+                            <td>Glicose e carboidratos solúveis</td>
+                            <td>Ácidos Graxos Voláteis (AGVs)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Exemplos</strong></td>
+                            <td>Suínos, aves, cães, humanos e equinos*</td>
+                            <td>Bovinos, ovinos, caprinos e búfalos</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="note">
+                <strong>*Nota sobre os Equinos:</strong> Equinos são monogástricos herbívoros. Eles possuem estômago simples, mas realizam fermentação pós-gástrica eficiente através de um ceco e cólon bastante desenvolvidos.
+            </div>
+        </section>
+
+        <section>
+            <h2> Os 4 Compartimentos dos Ruminantes</h2>
+            <p>A digestão dos ruminantes depende de três pré-estômagos (não-glandulares) e um estômago verdadeiro:</p>
+            <div class="grid">
+                <div class="card">
+                    <h3>1. Rúmen (Pancha)</h3>
+                    <p>Grande câmara de fermentação contendo bilhões de bactérias, protozoários e fungos que degradam a celulose e produzem AGVs.</p>
+                </div>
+                <div class="card">
+                    <h3>2. Retículo (Barrete)</h3>
+                    <p>Trabalha integrado ao rúmen, retendo corpos estranhos e impulsionando o alimento de volta à boca durante a ruminação.</p>
+                </div>
+                <div class="card">
+                    <h3>3. Omaso (Folho)</h3>
+                    <p>Formado por lâminas musculares ("folhas") que filtram o conteúdo alimentar, absorvendo água e minerais antes da digestão enzimática.</p>
+                </div>
+                <div class="card">
+                    <h3>4. Abomaso (Coagulador)</h3>
+                    <p>Único estômago glandular verdadeiro. Secreta suco gástrico, ácido clorídrico e pepsina para quebrar proteínas e micro-organismos.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2> Sistema Digestivo nos Monogástricos</h2>
+            <div class="card mono">
+                <h3>Digestão Simples e Enzimática</h3>
+                <p>
+                    Nos monogástricos, o alimento segue da boca e esôfago para um estômago de cavidade única. Lá, a digestão química se inicia com a ação do ácido clorídrico e enzimas gástricas. A maior parte do processo enzimático e a absorção dos nutrientes ocorrem posteriormente no intestino delgado.
+                </p>
+            </div>
+        </section>
+
+        <footer>
+            <p>Guia Informativo sobre Fisiologia e Anatomia Animal</p>
+        </footer>
+    </div>
+
+</body>
+</html>
+"""
+
+with open("sistema_digestivo_animais.html", "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+print("HTML file created successfully.")
